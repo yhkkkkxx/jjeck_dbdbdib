@@ -26,6 +26,9 @@
         <activity
             android:name="com.example.jjeck.MainActivity"
             android:exported="true"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB8O3KOGJONw_ZZk4ESx1aAsdZGxakL16M"/>
     </application>
 
 </manifest>
