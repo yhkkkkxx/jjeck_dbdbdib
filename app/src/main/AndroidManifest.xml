@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Penguin_plate">
         <activity
-            android:name="com.example.jjeck.ViewActivity"
-            android:exported="true" />
+            android:name=".SplashActivity3"
+            android:exported="false" />
         <activity
-            android:name="com.example.jjeck.SplashActivity"
+            android:name=".SplashActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +27,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.jjeck.MainActivity"
-            android:exported="true"></activity>
+            android:name=".MainActivity"
+            android:exported="true" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB8O3KOGJONw_ZZk4ESx1aAsdZGxakL16M"/>
+            android:value="AIzaSyB8O3KOGJONw_ZZk4ESx1aAsdZGxakL16M" />
     </application>
 
 </manifest>

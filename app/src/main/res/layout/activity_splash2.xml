@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context=".SplashActivity"
+    android:gravity="center">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#BF2547"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/jeonju"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <View
+        android:layout_weight="0.3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="전주에 오신 것을 환영합니다\n\n\nWelcome to Jeonju\n\n\n欢迎光临全州\n\n\n全州へようこそ"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_weight="0.7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <TextView
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Touch the Screen"
+        android:textColor="#8c8c8c"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#BF2547"/>
+</LinearLayout>
