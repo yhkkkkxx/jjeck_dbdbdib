@@ -21,10 +21,15 @@
         android:layout_marginBottom="20dp"
         android:layout_marginVertical="20dp"/>
 
+    <View
+        android:layout_weight="0.3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#BF2547"
+        android:background="#00ff0000"
         android:text="한국어"
         android:textColor="#000000"
         android:textSize="45dp"
@@ -32,7 +37,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#BF2547"
+        android:background="#00ff0000"
         android:text="English"
         android:textColor="#000000"
         android:textSize="45dp"
@@ -41,7 +46,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#BF2547"
+        android:background="#00ff0000"
         android:text="中国话"
         android:textColor="#000000"
         android:textSize="45dp"
@@ -49,14 +54,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#BF2547"
+        android:background="#00ff0000"
         android:text="日本话"
         android:textColor="#000000"
         android:textSize="45dp"
         android:layout_marginVertical="15dp"/>
 
     <View
-        android:layout_weight="1"
+        android:layout_weight="0.7"
         android:layout_width="0dp"
         android:layout_height="0dp"/>
 
