@@ -14,7 +14,7 @@ class SplashActivity2 : AppCompatActivity() {
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val action = event.action
         if (action == MotionEvent.ACTION_DOWN) {
-            val intent = Intent(this, SplashActivity3::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
         return super.onTouchEvent(event)
