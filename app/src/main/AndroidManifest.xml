@@ -15,10 +15,10 @@
         android:theme="@style/Theme.Penguin_plate">
         <activity
             android:name=".SplashActivity3"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SplashActivity2"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">

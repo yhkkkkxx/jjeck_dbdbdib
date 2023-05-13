@@ -7,15 +7,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.location.Location
 import android.location.LocationManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.*
@@ -29,6 +30,8 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import java.util.Locale
+
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -36,13 +39,30 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var mFusedLocationClient: FusedLocationProviderClient
     lateinit var mMap: GoogleMap
 
+
     // Current location is set to seoul, this will be of no use
     var currentLocation: LatLng = LatLng(37.0, 126.0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
+//        val lang = intent.getStringExtra("lang")
+//        setAppLocale(this, "en")
+//        when (lang) {
+//            "en" ->setAppLocale(this, "en")
+//            "ko" ->setAppLocale(this, "ko")
+//            "zh" ->setAppLocale(this, "zh")
+//            else ->setAppLocale(this, "ja")
+//        }
+
+//        val locale = Locale(lang)
+//        Locale.setDefault(locale)
+//        val config = this.resources.configuration
+//        config.setLocale(locale)
+//        this.createConfigurationContext(config)
+//        this.resources.updateConfiguration(config, this.resources.displayMetrics)
+
+        setContentView(R.layout.activity_main)
         // Fetching API_KEY which we wrapped
         val ai: ApplicationInfo = applicationContext.packageManager
             .getApplicationInfo(applicationContext.packageName, PackageManager.GET_META_DATA)
@@ -183,5 +203,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                 getLastLocation()
             }
         }
+    }
+    fun setAppLocale(context: Context, language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = context.resources.configuration
+        config.setLocale(locale)
+        context.createConfigurationContext(config)
+        context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 }
