@@ -3,13 +3,15 @@ package com.example.jjeck
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.akexorcist.localizationactivity.core.LanguageSetting.setLanguage
 import java.util.Locale
-
+;
 
 class SplashActivity3 : AppCompatActivity() {
     private lateinit var korean: Button
@@ -25,7 +27,9 @@ class SplashActivity3 : AppCompatActivity() {
         chinese = findViewById(R.id.button3)
         japanese = findViewById(R.id.button4)
 
+
         korean.setOnClickListener {
+            //PreferenceManager(this).updateLanguage("ta")
             setAppLocale(this, "ko")
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("lang", "ko")
@@ -71,12 +75,10 @@ class SplashActivity3 : AppCompatActivity() {
         val config = context.resources.configuration
         config.setLocale(locale)
         context.createConfigurationContext(config)
-
+        context.resources.configuration.setLocale(locale)
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
 
     }
 
-    override fun attachBaseContext(newBase : Context?) {
-        super.attachBaseContext(newBase)
-    }
+
 }

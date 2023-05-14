@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val pERMISSION_ID = 42
     lateinit var mFusedLocationClient: FusedLocationProviderClient
+    lateinit var language: String
     lateinit var mMap: GoogleMap
 
 
@@ -46,21 +47,15 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        val lang = intent.getStringExtra("lang")
-//        setAppLocale(this, "en")
-//        when (lang) {
-//            "en" ->setAppLocale(this, "en")
-//            "ko" ->setAppLocale(this, "ko")
-//            "zh" ->setAppLocale(this, "zh")
-//            else ->setAppLocale(this, "ja")
-//        }
+        language = intent.getStringExtra("lang").toString()
+        when (language) {
+            "en" ->setAppLocale(this, "en")
+            "ko" ->setAppLocale(this, "ko")
+            "zh" ->setAppLocale(this, "zh")
+            else ->setAppLocale(this, "ja")
+        }
 
-//        val locale = Locale(lang)
-//        Locale.setDefault(locale)
-//        val config = this.resources.configuration
-//        config.setLocale(locale)
-//        this.createConfigurationContext(config)
-//        this.resources.updateConfiguration(config, this.resources.displayMetrics)
+
 
         setContentView(R.layout.activity_main)
         // Fetching API_KEY which we wrapped
@@ -210,6 +205,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val config = context.resources.configuration
         config.setLocale(locale)
         context.createConfigurationContext(config)
-        context.resources.updateConfiguration(config, context.resources.displayMetrics)
+        context.resources.configuration.setLocale(locale)
     }
 }
