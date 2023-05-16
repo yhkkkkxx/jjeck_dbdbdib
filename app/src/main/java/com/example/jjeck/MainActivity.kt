@@ -15,6 +15,7 @@ import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -96,7 +97,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
         // Adding functionality to the button
-        val btn = findViewById<Button>(R.id.currentLoc)
+        val btn = findViewById<ImageButton>(R.id.currentLoc)
         btn.setOnClickListener {
             getLastLocation()
         }
