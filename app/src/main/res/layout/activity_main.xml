@@ -26,6 +26,16 @@
         android:src = "@drawable/ic_geolocate_foreground"
         tools:ignore="SpeakableTextPresentCheck"
         />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:spinnerMode="dropdown"
+        android:background="@color/white"/>
+
+
     <fragment android:id="@+id/autocomplete_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
