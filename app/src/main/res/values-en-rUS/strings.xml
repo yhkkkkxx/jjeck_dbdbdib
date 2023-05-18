@@ -3,4 +3,6 @@
     <string name="app_name">jjeck</string>
     <string name="hello">hello</string>
     <string name="선택하세요">select a category</string>
+    <string name="식당">restaurant</string>
+    <string name="숙박">Accommodation</string>
 </resources>

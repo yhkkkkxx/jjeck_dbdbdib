@@ -12,6 +12,8 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         tools:context=".MapsActivity" />
 
     <ImageButton
@@ -26,14 +28,8 @@
         android:src = "@drawable/ic_geolocate_foreground"
         tools:ignore="SpeakableTextPresentCheck"
         />
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:spinnerMode="dropdown"
-        android:background="@color/white"/>
+
+
 
 
     <fragment android:id="@+id/autocomplete_fragment"
@@ -41,5 +37,27 @@
         android:layout_height="wrap_content"
         android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
         />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="169dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="50dp"
+        android:drawableLeft="@drawable/ic_restaurant_foreground"
+        android:text="식당" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="50dp"
+        android:drawableLeft= "@drawable/ic_accomodation_foreground"
+        android:text="숙박" />
 
 </RelativeLayout>
