@@ -51,16 +51,20 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
 
         language = intent.getStringExtra("lang").toString()
-        when (language) {
-            "en" ->setAppLocale(this, "en")
-            "ko" ->setAppLocale(this, "ko")
-            "zh" ->setAppLocale(this, "zh")
-            else ->setAppLocale(this, "ja")
-        }
-
+        setAppLocale(this, language) //언어변경
 
 
         setContentView(R.layout.activity_main)
+
+        val btn_res = findViewById<Button>(R.id.button_res)
+        btn_res.setOnClickListener {//여기에 식당 보여주면 될듯
+
+
+        }
+        val btn_accom = findViewById<Button>(R.id.button_acc)
+        btn_accom.setOnClickListener {//여기에 숙박
+
+        }
         // Fetching API_KEY which we wrapped
         val ai: ApplicationInfo = applicationContext.packageManager
             .getApplicationInfo(applicationContext.packageName, PackageManager.GET_META_DATA)

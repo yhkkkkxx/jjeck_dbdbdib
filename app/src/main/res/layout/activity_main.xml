@@ -39,25 +39,30 @@
         />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="169dp"
+        android:id="@+id/button_res"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="50dp"
         android:drawableLeft="@drawable/ic_restaurant_foreground"
-        android:text="식당" />
+        android:autoSizeTextType="uniform"
+        android:drawablePadding="-30dp"
+        android:text="@string/식당" />
 
     <Button
-        android:id="@+id/button5"
-        android:layout_width="160dp"
+        android:id="@+id/button_acc"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="230dp"
+        android:layout_marginStart="190dp"
         android:layout_marginTop="50dp"
-        android:drawableLeft= "@drawable/ic_accomodation_foreground"
-        android:text="숙박" />
+        android:textAlignment="center"
+        android:autoSizeTextType="uniform"
+        android:drawablePadding="-50dp"
+        android:drawableLeft="@drawable/ic_accomodation_foreground"
+        android:text="@string/숙박" />
 
 </RelativeLayout>
