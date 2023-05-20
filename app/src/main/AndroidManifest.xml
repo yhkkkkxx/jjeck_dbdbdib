@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Penguin_plate">
+        android:theme="@style/Theme.Penguin_plate"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".SplashActivity3"
             android:exported="true" />
@@ -36,5 +37,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB8O3KOGJONw_ZZk4ESx1aAsdZGxakL16M" />
     </application>
+
 
 </manifest>

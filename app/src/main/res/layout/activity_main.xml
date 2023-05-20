@@ -38,31 +38,52 @@
         android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
         />
 
-    <Button
-        android:id="@+id/button_res"
-        android:layout_width="190dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:layout_marginTop="50dp"
-        android:drawableLeft="@drawable/ic_restaurant_foreground"
-        android:autoSizeTextType="uniform"
-        android:drawablePadding="-30dp"
-        android:text="@string/식당" />
+        android:weightSum="1">
 
-    <Button
-        android:id="@+id/button_acc"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="190dp"
-        android:layout_marginTop="50dp"
-        android:textAlignment="center"
-        android:autoSizeTextType="uniform"
-        android:drawablePadding="-50dp"
-        android:drawableLeft="@drawable/ic_accomodation_foreground"
-        android:text="@string/숙박" />
+        <View
+            android:layout_weight="0.35"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <Button
+            android:id="@+id/button_res"
+            android:layout_width="195dp"
+            android:layout_height="70dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:drawableLeft="@drawable/ic_restaurant_foreground"
+            android:textSize="18dp"
+            android:drawablePadding="-35dp"
+            android:text="@string/식당" />
+
+        <View
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <Button
+            android:id="@+id/button_acc"
+            android:layout_width="195dp"
+            android:layout_height="70dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:textAlignment="center"
+            android:textSize="14dp"
+            android:drawablePadding="-55dp"
+            android:drawableLeft="@drawable/ic_accomodation_foreground"
+            android:text="@string/숙박" />
+        <View
+            android:layout_weight="0.35"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+    </LinearLayout>
+
 
 </RelativeLayout>
