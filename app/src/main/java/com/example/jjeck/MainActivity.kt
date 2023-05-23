@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var language: String
     lateinit var mMap: GoogleMap
 
+    var textView: TextView? = null
     var button: Button? = null
 
     // Current location is set to seoul, this will be of no use
@@ -108,8 +109,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             getLastLocation()
         }
 
-        //button = findViewById<View>(R.id.listView_button) as Button
-        //button!!.setOnClickListener( { JsonReceiver().sendRequest() })
+
+/*        textView = findViewById<View>(R.id.textView_main_result) as TextView
+        button = findViewById<View>(R.id.listView_button) as Button
+        button!!.setOnClickListener( { JsonReceiver().sendRequest() })*/
     }
 
 
@@ -218,45 +221,4 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         context.createConfigurationContext(config)
         context.resources.configuration.setLocale(locale)
     }
-/*    private fun getJsonString(): String? {
-        var json = "hi"
-        println(json)
-        try {
-            val `is` = assets.open("ACCOM_INFO_KOREAN.json")
-            val fileSize = `is`.available()
-            val buffer = ByteArray(fileSize)
-            `is`.read(buffer)
-            `is`.close()
-            json = String(buffer, StandardCharsets.UTF_8)
-
-        } catch (ex: IOException) {
-            ex.printStackTrace()
-        }
-        return json
-    }
-
-    private fun jsonParsing(json: String?) {
-        try {
-            val accomList: ArrayList<Accom_info_kor> = ArrayList()
-            val jsonObject = JSONObject(json)
-            val accomArray = jsonObject.getJSONArray("Accom_INFO")
-            for (i in 0 until accomArray.length()) {
-                val accomObject = accomArray.getJSONObject(i)
-                val accom = Accom_info_kor()
-                accom.setAccomName(accomObject.getString("title"))
-                accom.setAccomLocation(accomObject.getString("grade"))
-                accom.setAccomType(accomObject.getString("category"))
-                accomList.add(accom)
-            }
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-    }
-
-    fun println(data: String) {
-        textView!!.text = """
-             $data
-             
-             """.trimIndent()
-    }*/
 }
