@@ -1,5 +1,6 @@
 package com.example.jjeck
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -16,16 +17,13 @@ class JsonReceiver : AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-/*
-        setContentView(R.layout.activity_main)
+
         textView = findViewById<View>(R.id.textView_main_result) as TextView
         button = findViewById<View>(R.id.listView_button) as Button
-        button!!.setOnClickListener( { sendRequest() })*/
+        button!!.setOnClickListener( { sendRequest() })
     }
 
     fun sendRequest() {
-        setContentView(R.layout.activity_main)
-
         val url = "http://10.0.2.2/accom_info_kor.php"
 
         val queue = Volley.newRequestQueue(this)
@@ -38,11 +36,4 @@ class JsonReceiver : AppCompatActivity()  {
 
         queue.add(stringRequest)
     }
-
-/*    fun println(data: String) {
-        textView!!.text = """
-             $data
-             
-             """.trimIndent()
-    }*/
 }
