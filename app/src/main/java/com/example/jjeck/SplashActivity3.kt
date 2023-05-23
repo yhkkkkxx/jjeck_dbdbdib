@@ -41,13 +41,13 @@ class SplashActivity3 : AppCompatActivity() {
             setAppLocale(this, "ko")
             intent.putExtra("lang", "ko")
             Toast.makeText(this, "한글을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, JsonReceiver::class.java)
             startActivity(intent)
         }
 
         english.setOnClickListener {
             setAppLocale(this, "en")
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, JsonReceiver::class.java)
             intent.putExtra("lang", "en")
             Toast.makeText(this, "You choose english", Toast.LENGTH_SHORT).show()
             startActivity(intent)
@@ -55,19 +55,20 @@ class SplashActivity3 : AppCompatActivity() {
 
         chinese.setOnClickListener {
             setAppLocale(this, "zh")
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, JsonReceiver::class.java)
             intent.putExtra("lang", "zh")
             Toast.makeText(this, "您选择了中文.", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
         japanese.setOnClickListener {
             setAppLocale(this, "ja")
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, JsonReceiver::class.java)
             intent.putExtra("lang", "ja")
             Toast.makeText(this, "日本語を選びました.", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
 
+        //json
         setContentView(R.layout.activity_main)
 
         textView = findViewById<View>(R.id.textView_main_result) as TextView
@@ -76,6 +77,7 @@ class SplashActivity3 : AppCompatActivity() {
     }
 
 
+    //json
     private fun sendRequest() {
         val url = "http://10.0.2.2/accom_info_kor.php"
 
@@ -90,12 +92,6 @@ class SplashActivity3 : AppCompatActivity() {
         queue.add(stringRequest)
     }
 
-    fun println(data: String) {
-        textView!!.text = """
-             $data
-             
-             """.trimIndent()
-    }
 
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
