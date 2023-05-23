@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Penguin_plate"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ConnectActivity"
+            android:name=".JsonReceiver"
             android:exported="true" />
         <activity
             android:name=".SplashActivity3"

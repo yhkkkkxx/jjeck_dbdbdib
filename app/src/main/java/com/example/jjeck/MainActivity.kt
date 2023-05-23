@@ -7,17 +7,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
-import android.widget.ArrayAdapter
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -43,6 +42,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var language: String
     lateinit var mMap: GoogleMap
 
+    var button: Button? = null
 
     // Current location is set to seoul, this will be of no use
     var currentLocation: LatLng = LatLng(37.0, 126.0)
@@ -108,7 +108,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             getLastLocation()
         }
 
+        //button = findViewById<View>(R.id.listView_button) as Button
+        //button!!.setOnClickListener( { JsonReceiver().sendRequest() })
     }
+
 
     // Services such as getLastLocation()
     // will only run once map is ready
@@ -215,4 +218,45 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         context.createConfigurationContext(config)
         context.resources.configuration.setLocale(locale)
     }
+/*    private fun getJsonString(): String? {
+        var json = "hi"
+        println(json)
+        try {
+            val `is` = assets.open("ACCOM_INFO_KOREAN.json")
+            val fileSize = `is`.available()
+            val buffer = ByteArray(fileSize)
+            `is`.read(buffer)
+            `is`.close()
+            json = String(buffer, StandardCharsets.UTF_8)
+
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        }
+        return json
+    }
+
+    private fun jsonParsing(json: String?) {
+        try {
+            val accomList: ArrayList<Accom_info_kor> = ArrayList()
+            val jsonObject = JSONObject(json)
+            val accomArray = jsonObject.getJSONArray("Accom_INFO")
+            for (i in 0 until accomArray.length()) {
+                val accomObject = accomArray.getJSONObject(i)
+                val accom = Accom_info_kor()
+                accom.setAccomName(accomObject.getString("title"))
+                accom.setAccomLocation(accomObject.getString("grade"))
+                accom.setAccomType(accomObject.getString("category"))
+                accomList.add(accom)
+            }
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }
+
+    fun println(data: String) {
+        textView!!.text = """
+             $data
+             
+             """.trimIndent()
+    }*/
 }
