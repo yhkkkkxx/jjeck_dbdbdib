@@ -142,6 +142,26 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val position = CameraPosition.Builder().target(jeonju).zoom(16f).build()
         mMap.addMarker(MarkerOptions().position(jeonju))
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
+
+        val markerOption1 = MarkerOptions()
+        markerOption1.position(LatLng(35.817027, 127.154013)).title("라한 호텔")
+        mMap.addMarker(markerOption1)
+
+        val markerOption2 = MarkerOptions()
+        markerOption2.position(LatLng(35.815007, 127.151972)).title("강령전")
+        mMap.addMarker(markerOption2)
+
+        val markerOption3 = MarkerOptions()
+        markerOption3.position(LatLng(35.815064, 127.152840)).title("장수한옥민박")
+        mMap.addMarker(markerOption3)
+
+        val markerOption4 = MarkerOptions()
+        markerOption4.position(LatLng(35.813937, 127.152341)).title("푸른요람")
+        mMap.addMarker(markerOption4)
+
+        val markerOption5 = MarkerOptions()
+        markerOption5.position(LatLng(35.813933, 127.151825)).title("가원당")
+        mMap.addMarker(markerOption5)
     }
 
     // Get current location
