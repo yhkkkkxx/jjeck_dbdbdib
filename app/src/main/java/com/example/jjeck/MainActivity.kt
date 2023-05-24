@@ -121,11 +121,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         textView = findViewById<View>(R.id.textView_main_result) as TextView
         button = findViewById<View>(R.id.listView_button) as Button
-        button!!.setOnClickListener( { sendRequest() })
+        button!!.setOnClickListener( { sendRequest(language) })
     }
 
-    fun sendRequest() {
-        val url = "http://10.0.2.2/test.php"
+    fun sendRequest(lang: String) {
+        val url = "http://10.0.2.2/accom_info_${lang}.php"
 
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(
@@ -168,6 +168,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val markerOption1 = MarkerOptions()
         markerOption1.position(LatLng(35.817027, 127.154013)).title("라한 호텔").alpha(0.5f)
         val marker1: Marker = mMap.addMarker(markerOption1)
+
 
         val markerOption2 = MarkerOptions()
         markerOption2.position(LatLng(35.815007, 127.151972)).title("강령전").alpha(0.5f)

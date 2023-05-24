@@ -86,11 +86,6 @@
     </LinearLayout>
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView_button"
-        android:text="push"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -100,6 +95,13 @@
         android:padding="5dp"
         android:textSize="10dp"
         android:id="@+id/textView_main_result" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView_button"
+        android:layout_marginTop="120dp"
+        android:text="push"/>
 
     <LinearLayout
         android:id="@+id/card_view"
