@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         language = intent.getStringExtra("lang").toString()
         setAppLocale(this, language) //언어변경
 
-
         setContentView(R.layout.activity_main)
 
         val btn_res = findViewById<Button>(R.id.button_res)
@@ -68,6 +67,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         val btn_accom = findViewById<Button>(R.id.button_acc)
         btn_accom.setOnClickListener {//여기에 숙박
+
 
         }
         // Fetching API_KEY which we wrapped
@@ -116,11 +116,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         textView = findViewById<View>(R.id.textView_main_result) as TextView
         button = findViewById<View>(R.id.listView_button) as Button
-        button!!.setOnClickListener( { sendRequest() })
+        button!!.setOnClickListener( { sendRequest(language) })
     }
 
-    fun sendRequest() {
-        val url = "http://10.0.2.2/accom_info_kor.php"
+    fun sendRequest(lang: String) {
+        val url = "http://10.0.2.2/accom_info_${lang}.php"
 
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(

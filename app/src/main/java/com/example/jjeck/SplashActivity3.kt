@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
@@ -23,8 +24,6 @@ class SplashActivity3 : AppCompatActivity() {
     private lateinit var japanese: Button
     private lateinit var language_code: String
 
-    var textView: TextView? = null
-    var button: Button? = null
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -39,9 +38,9 @@ class SplashActivity3 : AppCompatActivity() {
         korean.setOnClickListener {
             //PreferenceManager(this).updateLanguage("ta")
             setAppLocale(this, "ko")
-            intent.putExtra("lang", "ko")
             Toast.makeText(this, "한글을 선택하셨습니다.", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("lang", "ko")
             startActivity(intent)
         }
 
