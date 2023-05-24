@@ -30,6 +30,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         language = intent.getStringExtra("lang").toString()
         setAppLocale(this, language) //언어변경
 
+
         setContentView(R.layout.activity_main)
 
         val btn_res = findViewById<Button>(R.id.button_res)
@@ -67,7 +69,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         val btn_accom = findViewById<Button>(R.id.button_acc)
         btn_accom.setOnClickListener {//여기에 숙박
-
 
         }
         // Fetching API_KEY which we wrapped
@@ -85,9 +86,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        // Initializing fused location client
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        // Initialize the AutocompleteSupportFragment.
+
         val autocompleteFragment =
             supportFragmentManager.findFragmentById(R.id.autocomplete_fragment)
                     as AutocompleteSupportFragment
@@ -116,11 +116,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         textView = findViewById<View>(R.id.textView_main_result) as TextView
         button = findViewById<View>(R.id.listView_button) as Button
-        button!!.setOnClickListener( { sendRequest(language) })
+        button!!.setOnClickListener( { sendRequest() })
     }
 
-    fun sendRequest(lang: String) {
-        val url = "http://10.0.2.2/accom_info_${lang}.php"
+    fun sendRequest() {
+        val url = "http://10.0.2.2/accom_info_kor.php"
 
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(
@@ -135,9 +135,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     // Services such as getLastLocation()
     // will only run once map is ready
-    override fun onMapReady(p0: GoogleMap) {
-        mMap = p0
-        getLastLocation()
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        val jeonju = LatLng(35.8147, 127.1526)
+        val position = CameraPosition.Builder().target(jeonju).zoom(16f).build()
+        mMap.addMarker(MarkerOptions().position(jeonju))
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
     }
 
     // Get current location
