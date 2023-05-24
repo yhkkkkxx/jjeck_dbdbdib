@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -39,6 +41,7 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import kotlinx.android.synthetic.main.activity_main.card_view
+import java.lang.Exception
 import java.util.Locale
 
 
@@ -135,6 +138,23 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         queue.add(stringRequest)
     }
 
+    fun geoCoding(address: String): Location {
+        return try {
+            Geocoder(applicationContext, Locale.KOREA).getFromLocationName(address, 1)?.let {
+                Location("").apply {
+                    latitude = it[0].latitude
+                    longitude = it[0].longitude
+                }
+            }?: Location("").apply {
+                latitude = 0.0
+                longitude = 0.0
+            }
+        }catch (e:Exception) {
+            e.printStackTrace()
+            geoCoding(address)
+        }
+    }
+
     // Services such as getLastLocation()
     // will only run once map is ready
     override fun onMapReady(googleMap: GoogleMap) {
@@ -146,24 +166,24 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
 
         val markerOption1 = MarkerOptions()
-        markerOption1.position(LatLng(35.817027, 127.154013)).title("라한 호텔")
+        markerOption1.position(LatLng(35.817027, 127.154013)).title("라한 호텔").alpha(0.5f)
         val marker1: Marker = mMap.addMarker(markerOption1)
 
 
         val markerOption2 = MarkerOptions()
-        markerOption2.position(LatLng(35.815007, 127.151972)).title("강령전")
+        markerOption2.position(LatLng(35.815007, 127.151972)).title("강령전").alpha(0.5f)
         mMap.addMarker(markerOption2)
 
         val markerOption3 = MarkerOptions()
-        markerOption3.position(LatLng(35.815064, 127.152840)).title("장수한옥민박")
+        markerOption3.position(LatLng(geoCoding("전라북도 전주시 완산구 은행로 55-1").latitude, geoCoding("전라북도 전주시 완산구 은행로 55-1").longitude)).title("장수한옥민박").alpha(0.5f)
         mMap.addMarker(markerOption3)
 
         val markerOption4 = MarkerOptions()
-        markerOption4.position(LatLng(35.813937, 127.152341)).title("푸른요람")
+        markerOption4.position(LatLng(35.813937, 127.152341)).title("푸른요람").alpha(0.5f)
         mMap.addMarker(markerOption4)
 
         val markerOption5 = MarkerOptions()
-        markerOption5.position(LatLng(35.813933, 127.151825)).title("가원당")
+        markerOption5.position(LatLng(35.813933, 127.151825)).title("가원당").alpha(0.5f)
         mMap.addMarker(markerOption5)
 
         googleMap!!.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
