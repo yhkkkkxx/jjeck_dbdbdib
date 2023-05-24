@@ -13,12 +13,17 @@ import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.android.volley.Request
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -109,11 +114,24 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
 
-/*        textView = findViewById<View>(R.id.textView_main_result) as TextView
+        textView = findViewById<View>(R.id.textView_main_result) as TextView
         button = findViewById<View>(R.id.listView_button) as Button
-        button!!.setOnClickListener( { JsonReceiver().sendRequest() })*/
+        button!!.setOnClickListener( { sendRequest() })
     }
 
+    fun sendRequest() {
+        val url = "http://10.0.2.2/accom_info_kor.php"
+
+        val queue = Volley.newRequestQueue(this)
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            { response: String ->
+                textView!!.text = "response: $response"
+            }
+        ) { error: VolleyError -> textView!!.text = "error: ${error.message}" }
+
+        queue.add(stringRequest)
+    }
 
     // Services such as getLastLocation()
     // will only run once map is ready
