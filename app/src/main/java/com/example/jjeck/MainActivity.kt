@@ -32,11 +32,13 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import kotlinx.android.synthetic.main.activity_main.card_view
 import java.util.Locale
 
 
@@ -120,7 +122,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun sendRequest() {
-        val url = "http://10.0.2.2/accom_info_kor.php"
+        val url = "http://10.0.2.2/test.php.php"
 
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(
@@ -137,7 +139,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     // will only run once map is ready
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
+        card_view.visibility = View.GONE
         val jeonju = LatLng(35.8147, 127.1526)
         val position = CameraPosition.Builder().target(jeonju).zoom(16f).build()
         mMap.addMarker(MarkerOptions().position(jeonju))
@@ -145,7 +147,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val markerOption1 = MarkerOptions()
         markerOption1.position(LatLng(35.817027, 127.154013)).title("라한 호텔")
-        mMap.addMarker(markerOption1)
+        val marker1: Marker = mMap.addMarker(markerOption1)
+
 
         val markerOption2 = MarkerOptions()
         markerOption2.position(LatLng(35.815007, 127.151972)).title("강령전")
@@ -162,6 +165,24 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val markerOption5 = MarkerOptions()
         markerOption5.position(LatLng(35.813933, 127.151825)).title("가원당")
         mMap.addMarker(markerOption5)
+
+        googleMap!!.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
+            override fun onMarkerClick(marker: Marker) : Boolean {
+                card_view.visibility = View.VISIBLE
+                var accom_Name = findViewById<TextView>(R.id.accom_name)
+                var accom_addr = findViewById<TextView>(R.id.accom_addr)
+                var accom_parkinglot = findViewById<TextView>(R.id.accom_parkinglot)
+                var accom_Wifi = findViewById<TextView>(R.id.accom_wifi)
+
+                return false
+            }
+        })
+
+        googleMap!!.setOnMapClickListener(object : GoogleMap.OnMapClickListener {
+            override fun onMapClick(latLng: LatLng) {
+                card_view.visibility = View.GONE
+            }
+        })
     }
 
     // Get current location
