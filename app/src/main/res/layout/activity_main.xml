@@ -85,24 +85,6 @@
             android:layout_height="0dp"/>
     </LinearLayout>
 
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_weight="4"
-        android:layout_marginTop="100dp"
-        android:padding="5dp"
-        android:textSize="20dp"
-        android:id="@+id/textView_main_result" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView_button"
-        android:layout_marginTop="120dp"
-        android:text="push"/>
-
     <LinearLayout
         android:id="@+id/card_view"
         android:layout_width="match_parent"

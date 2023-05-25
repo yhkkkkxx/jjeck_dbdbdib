@@ -1,14 +1,13 @@
 package com.example.jjeck
 
 import android.Manifest
-import android.R.attr.data
-import android.R.attr.text
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -43,7 +42,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import kotlinx.android.synthetic.main.activity_main.card_view
 import org.json.JSONArray
-import org.json.JSONObject
+import java.lang.Exception
 import java.util.Locale
 
 
@@ -127,30 +126,37 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         btn.setOnClickListener {
             getLastLocation()
         }
-
-
-        textView = findViewById<View>(R.id.textView_main_result) as TextView
-        button = findViewById<View>(R.id.listView_button) as Button
-        button!!.setOnClickListener( { sendRequest(language) })
     }
 
-    fun sendRequest(lang: String) {
-        val url = "http://10.0.2.2/accom_info_${lang}.php"
-
+    fun sendRequest() {
+        val url = "http://10.0.2.2/accom_info_ko.php"
 
         val queue = Volley.newRequestQueue(this)
-        Log.v("result", "hi")
         val stringRequest = StringRequest(
             Request.Method.GET, url,
             { response: String ->
-                val jsonArr = JSONArray(response)
+                val accom_Arr = JSONArray(response)
 
-                for (i in 0 until jsonArr.length()) {
-                    val jsonObj = jsonArr.getJSONObject(i)
-                    Log.v("json",jsonObj.toString())
+                for(i in 0 until 10) {
+                    val accom_name = accom_Arr.getJSONObject(i).getString("accom_name")
+                    val accom_addr = accom_Arr.getJSONObject(i).getString("accom_addr")
+                    val accom_parkinglot = accom_Arr.getJSONObject(i).getString(("accom_parkinglot"))
+                    val accom_wifi = accom_Arr.getJSONObject((i)).getString("accom_wifi")
+
+                    val markerOption = MarkerOptions()
+                    markerOption.position(LatLng(geoCoding(accom_addr).latitude, geoCoding(accom_addr).longitude)).title(accom_name.toString()).alpha(0.5f)
+                    val marker: Marker = mMap.addMarker((markerOption))
+
+                    var accom_Name = findViewById<TextView>(R.id.accom_name)
+                    var accom_Addr = findViewById<TextView>(R.id.accom_addr)
+                    var accom_Parkinglot = findViewById<TextView>(R.id.accom_parkinglot)
+                    var accom_Wifi = findViewById<TextView>(R.id.accom_wifi)
+
+                    accom_Name.text = accom_name.toString()
+                    accom_Addr.text = accom_addr.toString()
+                    accom_Parkinglot.text = accom_parkinglot.toString()
+                    accom_Wifi.text = accom_wifi
                 }
-
-                textView!!.text="${jsonArr.toString()}"
             }
         ) { error: VolleyError -> textView!!.text = "error: ${error.message}" }
 
@@ -184,34 +190,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(jeonju))
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
 
-        val markerOption1 = MarkerOptions()
-        markerOption1.position(LatLng(35.817027, 127.154013)).title("라한 호텔").alpha(0.5f)
-        val marker1: Marker = mMap.addMarker(markerOption1)
-
-
-        val markerOption2 = MarkerOptions()
-        markerOption2.position(LatLng(35.815007, 127.151972)).title("강령전").alpha(0.5f)
-        mMap.addMarker(markerOption2)
-
-        val markerOption3 = MarkerOptions()
-        markerOption3.position(LatLng(geoCoding("전라북도 전주시 완산구 은행로 55-1").latitude, geoCoding("전라북도 전주시 완산구 은행로 55-1").longitude)).title("장수한옥민박").alpha(0.5f)
-        mMap.addMarker(markerOption3)
-
-        val markerOption4 = MarkerOptions()
-        markerOption4.position(LatLng(35.813937, 127.152341)).title("푸른요람").alpha(0.5f)
-        mMap.addMarker(markerOption4)
-
-        val markerOption5 = MarkerOptions()
-        markerOption5.position(LatLng(35.813933, 127.151825)).title("가원당").alpha(0.5f)
-        mMap.addMarker(markerOption5)
+        sendRequest()
 
         googleMap!!.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
             override fun onMarkerClick(marker: Marker) : Boolean {
                 card_view.visibility = View.VISIBLE
-                var accom_Name = findViewById<TextView>(R.id.accom_name)
-                var accom_addr = findViewById<TextView>(R.id.accom_addr)
-                var accom_parkinglot = findViewById<TextView>(R.id.accom_parkinglot)
-                var accom_Wifi = findViewById<TextView>(R.id.accom_wifi)
 
                 return false
             }
