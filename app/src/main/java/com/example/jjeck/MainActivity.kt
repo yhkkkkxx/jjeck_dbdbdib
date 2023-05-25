@@ -71,22 +71,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val btn_res = findViewById<Button>(R.id.button_res)
         btn_res.setOnClickListener {//여기에 식당 보여주면 될듯
 
-
         }
         val btn_accom = findViewById<Button>(R.id.button_acc)
         btn_accom.setOnClickListener {//여기에 숙박
 
-            mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
-                override fun onMarkerClick(marker: Marker) : Boolean {
-                    card_view.visibility = View.VISIBLE
-                    var accom_Name = findViewById<TextView>(R.id.accom_name)
-                    var accom_addr = findViewById<TextView>(R.id.accom_addr)
-                    var accom_parkinglot = findViewById<TextView>(R.id.accom_parkinglot)
-                    var accom_Wifi = findViewById<TextView>(R.id.accom_wifi)
-
-                    return false
-                }
-            })
 
 
         }
@@ -132,8 +120,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 16F))
-
-
             }
 
             override fun onError(status: Status) {
@@ -148,9 +134,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
 
-        textView = findViewById<View>(R.id.textView_main_result) as TextView
-        button = findViewById<View>(R.id.listView_button) as Button
-        button!!.setOnClickListener( { sendRequest(language) })
     }
 
     fun sendRequest() {
@@ -168,8 +151,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                     val accom_parkinglot = accom_Arr.getJSONObject(i).getString(("accom_parkinglot"))
                     val accom_wifi = accom_Arr.getJSONObject((i)).getString("accom_wifi")
 
+                    //35.8147, 127.1526
+                    if(!(geoCoding(accom_addr).latitude.toDouble() in 35.8127..35.8167 && geoCoding(accom_addr).longitude.toDouble() in 127.1506..127.1546))
+                        continue
+
                     val markerOption = MarkerOptions()
-                    markerOption.position(LatLng(geoCoding(accom_addr).latitude, geoCoding(accom_addr).longitude)).title(accom_name.toString()).alpha(0.5f)
+                    markerOption.position(LatLng(geoCoding(accom_addr).latitude, geoCoding(accom_addr).longitude)).alpha(0.5f)
                     val marker: Marker = mMap.addMarker((markerOption))
 
                     var accom_Name = findViewById<TextView>(R.id.accom_name)
@@ -214,12 +201,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val position = CameraPosition.Builder().target(jeonju).zoom(16f).build()
         mMap.addMarker(MarkerOptions().position(jeonju))
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
-
-        sendRequest()
+        //sendRequest()
 
         googleMap!!.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
             override fun onMarkerClick(marker: Marker) : Boolean {
-                card_view.visibility = View.VISIBLE
+                if(marker.title == null)
+                    card_view.visibility = View.VISIBLE
 
                 return false
             }
