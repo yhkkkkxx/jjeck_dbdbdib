@@ -1,13 +1,14 @@
 package com.example.jjeck
 
 import android.Manifest
+import android.R.attr.data
+import android.R.attr.text
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -41,7 +42,8 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import kotlinx.android.synthetic.main.activity_main.card_view
-import java.lang.Exception
+import org.json.JSONArray
+import org.json.JSONObject
 import java.util.Locale
 
 
@@ -127,11 +129,20 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     fun sendRequest(lang: String) {
         val url = "http://10.0.2.2/accom_info_${lang}.php"
 
+
         val queue = Volley.newRequestQueue(this)
+        Log.v("result", "hi")
         val stringRequest = StringRequest(
             Request.Method.GET, url,
             { response: String ->
-                textView!!.text = "response: $response"
+                val jsonArr = JSONArray(response)
+
+                for (i in 0 until jsonArr.length()) {
+                    val jsonObj = jsonArr.getJSONObject(i)
+                    Log.v("json",jsonObj.toString())
+                }
+
+                textView!!.text="${jsonArr.toString()}"
             }
         ) { error: VolleyError -> textView!!.text = "error: ${error.message}" }
 
