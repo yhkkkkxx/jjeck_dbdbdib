@@ -1,6 +1,8 @@
 package com.example.jjeck
 
 import android.Manifest
+import android.R.attr.data
+import android.R.attr.text
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
@@ -120,6 +122,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 16F))
+
+
             }
 
             override fun onError(status: Status) {
@@ -137,7 +141,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun sendRequest() {
-        val url = "http://10.0.2.2/accom_info_ko.php"
+        val url = "http://10.0.2.2/accom_info_${language}.php"
 
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(
@@ -145,11 +149,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             { response: String ->
                 val accom_Arr = JSONArray(response)
 
-                for(i in 0 until 10) {
-                    val accom_name = accom_Arr.getJSONObject(i).getString("accom_name")
-                    val accom_addr = accom_Arr.getJSONObject(i).getString("accom_addr")
-                    val accom_parkinglot = accom_Arr.getJSONObject(i).getString(("accom_parkinglot"))
-                    val accom_wifi = accom_Arr.getJSONObject((i)).getString("accom_wifi")
+                for(i in 0 until 100) {
+                    val accom_name = accom_Arr.getJSONObject(i).getString("업소명")
+                    val accom_addr = accom_Arr.getJSONObject(i).getString("주소")
+                    val accom_parkinglot = accom_Arr.getJSONObject(i).getString("주차장")
+                    val accom_wifi = accom_Arr.getJSONObject((i)).getString("와이파이")
 
                     //35.8147, 127.1526
                     if(!(geoCoding(accom_addr).latitude.toDouble() in 35.8127..35.8167 && geoCoding(accom_addr).longitude.toDouble() in 127.1506..127.1546))
@@ -201,7 +205,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val position = CameraPosition.Builder().target(jeonju).zoom(16f).build()
         mMap.addMarker(MarkerOptions().position(jeonju))
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
-        //sendRequest()
+
+        sendRequest()
 
         googleMap!!.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
             override fun onMarkerClick(marker: Marker) : Boolean {
@@ -217,6 +222,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                 card_view.visibility = View.GONE
             }
         })
+        Log.v("시발","ㅎㅇ")
     }
 
     // Get current location

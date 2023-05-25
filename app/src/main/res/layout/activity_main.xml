@@ -110,7 +110,7 @@
                 <TextView
                     android:layout_width="375dp"
                     android:layout_height="45dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="8dp"
                     android:gravity="center|left"
                     android:text="@string/정보"
@@ -124,9 +124,10 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="70dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginLeft="16dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginTop="5dp"
                         android:text="@string/이름"
                         android:textColor="#000000"
@@ -150,9 +151,10 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="90dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginLeft="16dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginTop="7dp"
                         android:text="@string/주소"
                         android:textColor="#000000"
@@ -180,6 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginLeft="16dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginTop="7dp"
                         android:text="@string/주차장"
                         android:textColor="#000000"
@@ -202,11 +205,12 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="70dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginLeft="16dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginTop="7dp"
-                        android:text="WIFI: "
+                        android:text="WIFI"
                         android:textColor="#000000"
                         android:textSize="14dp"
                         android:textStyle="bold" />
