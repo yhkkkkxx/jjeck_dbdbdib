@@ -100,13 +100,21 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                     as AutocompleteSupportFragment
 
         // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
 
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: ${place.name}, ${place.id}")
+                Log.i(TAG, "Place: ${place.name}, ${place.id} , ${place.latLng}")
+
+                currentLocation = LatLng(place.latLng.latitude, place.latLng.longitude)
+
+                mMap.clear()
+                mMap.addMarker(MarkerOptions().position(currentLocation))
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 16F))
+
+
             }
 
             override fun onError(status: Status) {
