@@ -4,5 +4,8 @@
     <string name="hello">你好吗</string>
     <string name="선택하세요">请选择类别</string>
     <string name="식당">食堂</string>
+    <string name="이름">名字</string>
+    <string name="주소">地址</string>
+    <string name="주차장">停车场</string>
     <string name="숙박">住宿</string>
 </resources>

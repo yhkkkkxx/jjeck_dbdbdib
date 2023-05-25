@@ -3,7 +3,10 @@
     <string name="hello">hello</string>
     <string name="선택하세요">select a category</string>
     <string name="식당">restaurant</string>
-    <string name="숙박">Accommodation</string>
+    <string name="주소">Address</string>
+    <string name="주차장">Parking Lot</string>
+    <string name="이름">name</string>
+    <string name="숙박">Accomodation</string>
 
 
 </resources>

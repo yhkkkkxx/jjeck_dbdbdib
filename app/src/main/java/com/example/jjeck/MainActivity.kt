@@ -42,7 +42,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import kotlinx.android.synthetic.main.activity_main.card_view
 import org.json.JSONArray
-import java.lang.Exception
+import org.json.JSONObject
 import java.util.Locale
 
 
@@ -76,6 +76,19 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val btn_accom = findViewById<Button>(R.id.button_acc)
         btn_accom.setOnClickListener {//여기에 숙박
 
+            mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
+                override fun onMarkerClick(marker: Marker) : Boolean {
+                    card_view.visibility = View.VISIBLE
+                    var accom_Name = findViewById<TextView>(R.id.accom_name)
+                    var accom_addr = findViewById<TextView>(R.id.accom_addr)
+                    var accom_parkinglot = findViewById<TextView>(R.id.accom_parkinglot)
+                    var accom_Wifi = findViewById<TextView>(R.id.accom_wifi)
+
+                    return false
+                }
+            })
+
+
         }
         // Fetching API_KEY which we wrapped
         val ai: ApplicationInfo = applicationContext.packageManager
@@ -99,7 +112,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                     as AutocompleteSupportFragment
 
         // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.PHONE_NUMBER))
+        //autocompleteFragment.setTypeFilter(TypeFilter.("restaurant"))
 
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
@@ -110,7 +124,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                 currentLocation = LatLng(place.latLng.latitude, place.latLng.longitude)
 
                 mMap.clear()
-                mMap.addMarker(MarkerOptions().position(currentLocation))
+                mMap.addMarker(MarkerOptions().position(currentLocation).title(place.name)
+                    .snippet(
+                            "PHONE NUMBER : ${place.phoneNumber}" +
+                            "Lating : ${place.latLng}"
+                            ))
+
+
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 16F))
 
 
@@ -126,6 +146,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         btn.setOnClickListener {
             getLastLocation()
         }
+
+
+        textView = findViewById<View>(R.id.textView_main_result) as TextView
+        button = findViewById<View>(R.id.listView_button) as Button
+        button!!.setOnClickListener( { sendRequest(language) })
     }
 
     fun sendRequest() {

@@ -4,5 +4,8 @@
     <string name="hello">こんにちは</string>
     <string name="선택하세요">カテゴリを選択してください</string>
     <string name="식당">しょくどう</string>
+    <string name="이름">めいしょう</string>
+    <string name="주소">じゅうしょ</string>
+    <string name="주차장">ちゅうしゃ</string>
     <string name="숙박">しゅくはく</string>
 </resources>
