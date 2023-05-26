@@ -146,23 +146,60 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                 val accom_Arr = JSONArray(response)
 
                 for(i in 0 until 50) {
-                    val accom_name = accom_Arr.getJSONObject(i).getString("accom_name")
-                    val accom_addr = accom_Arr.getJSONObject(i).getString("accom_addr")
-                    val accom_parkinglot = accom_Arr.getJSONObject(i).getString(("accom_parkinglot"))
-                    val accom_wifi = accom_Arr.getJSONObject((i)).getString("accom_wifi")
+                    if(language.toString() == "ko") {
+                        val accom_name = accom_Arr.getJSONObject(i).getString("accom_name")
+                        val accom_addr = accom_Arr.getJSONObject(i).getString("accom_addr")
+                        val accom_parkinglot =
+                            accom_Arr.getJSONObject(i).getString(("accom_parkinglot"))
+                        val accom_wifi = accom_Arr.getJSONObject((i)).getString("accom_wifi")
 
-                    //35.8147, 127.1526
-                    if(!(geoCoding(accom_addr).latitude.toDouble() in 35.8127..35.8167 && geoCoding(accom_addr).longitude.toDouble() in 127.1506..127.1546))
-                        continue
+                        //35.8147, 127.1526
+                        if (!(geoCoding(accom_addr).latitude.toDouble() in 35.8127..35.8167 && geoCoding(
+                                accom_addr
+                            ).longitude.toDouble() in 127.1506..127.1546)
+                        )
+                            continue
 
-                    val markerOption = MarkerOptions()
-                    markerOption.position(LatLng(geoCoding(accom_addr).latitude, geoCoding(accom_addr).longitude)).title(accom_name.toString()).alpha(0.5f)
-                    val marker: Marker = mMap.addMarker((markerOption))
-                    marker.tag =
-                        accom_name + "/" +
-                        accom_addr + "/" +
-                        accom_parkinglot + "/" +
-                        accom_wifi
+                        val markerOption = MarkerOptions()
+                        markerOption.position(
+                            LatLng(
+                                geoCoding(accom_addr).latitude,
+                                geoCoding(accom_addr).longitude
+                            )
+                        ).title(accom_name.toString()).alpha(0.5f)
+                        val marker: Marker = mMap.addMarker((markerOption))
+                        marker.tag =
+                            accom_name + "/" +
+                                    accom_addr + "/" +
+                                    accom_parkinglot + "/" +
+                                    accom_wifi
+                    }
+                    else {
+                        val accom_name = accom_Arr.getJSONObject(i).getString("accom_name")
+                        val accom_addr = accom_Arr.getJSONObject(i).getString("accom_addr")
+                        val accom_kor_addr = accom_Arr.getJSONObject(i).getString(("accom_kor_addr"))
+                        val accom_parkinglot = accom_Arr.getJSONObject(i).getString(("accom_parkinglot"))
+                        val accom_wifi = accom_Arr.getJSONObject((i)).getString("accom_wifi")
+
+                        //35.8147, 127.1526
+                        if (!(geoCoding(accom_kor_addr).latitude.toDouble() in 35.8127..35.8167 && geoCoding(accom_kor_addr).longitude.toDouble() in 127.1506..127.1546)
+                        )
+                            continue
+
+                        val markerOption = MarkerOptions()
+                        markerOption.position(
+                            LatLng(
+                                geoCoding(accom_kor_addr).latitude,
+                                geoCoding(accom_kor_addr).longitude
+                            )
+                        ).title(accom_name.toString()).alpha(0.5f)
+                        val marker: Marker = mMap.addMarker((markerOption))
+                        marker.tag =
+                            accom_name + "/" +
+                                    accom_addr + "/" +
+                                    accom_parkinglot + "/" +
+                                    accom_wifi
+                    }
                 }
             }
         ) { error: VolleyError -> textView!!.text = "error: ${error.message}" }
