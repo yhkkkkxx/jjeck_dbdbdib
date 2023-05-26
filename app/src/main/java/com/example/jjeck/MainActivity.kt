@@ -201,19 +201,21 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         googleMap!!.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
             override fun onMarkerClick(marker: Marker) : Boolean {
-                var accom_Name = findViewById<TextView>(R.id.accom_name)
-                var accom_Addr = findViewById<TextView>(R.id.accom_addr)
-                var accom_Parkinglot = findViewById<TextView>(R.id.accom_parkinglot)
-                var accom_Wifi = findViewById<TextView>(R.id.accom_wifi)
+                if(marker.title != null) {
+                    var accom_Name = findViewById<TextView>(R.id.accom_name)
+                    var accom_Addr = findViewById<TextView>(R.id.accom_addr)
+                    var accom_Parkinglot = findViewById<TextView>(R.id.accom_parkinglot)
+                    var accom_Wifi = findViewById<TextView>(R.id.accom_wifi)
 
-                var tags = marker.tag.toString().split("/")
+                    var tags = marker.tag.toString().split("/")
 
-                accom_Name.text = tags[0]
-                accom_Addr.text = tags[1]
-                accom_Parkinglot.text = tags[2]
-                accom_Wifi.text = tags[3]
+                    accom_Name.text = tags[0]
+                    accom_Addr.text = tags[1]
+                    accom_Parkinglot.text = tags[2]
+                    accom_Wifi.text = tags[3]
 
-                card_view.visibility = View.VISIBLE
+                    card_view.visibility = View.VISIBLE
+                }
 
                 return false
             }
