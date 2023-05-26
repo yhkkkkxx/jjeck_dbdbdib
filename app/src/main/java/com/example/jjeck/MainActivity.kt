@@ -73,11 +73,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val btn_res = findViewById<Button>(R.id.button_res)
         btn_res.setOnClickListener {//여기에 식당 보여주면 될듯
 
+
         }
         val btn_accom = findViewById<Button>(R.id.button_acc)
         btn_accom.setOnClickListener {//여기에 숙박
-
-
 
         }
         // Fetching API_KEY which we wrapped
@@ -102,8 +101,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                     as AutocompleteSupportFragment
 
         // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.PHONE_NUMBER))
-        //autocompleteFragment.setTypeFilter(TypeFilter.("restaurant"))
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
 
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
@@ -136,8 +134,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         btn.setOnClickListener {
             getLastLocation()
         }
-
-
     }
 
     fun sendRequest() {
@@ -149,29 +145,24 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             { response: String ->
                 val accom_Arr = JSONArray(response)
 
-                for(i in 0 until 100) {
-                    val accom_name = accom_Arr.getJSONObject(i).getString("업소명")
-                    val accom_addr = accom_Arr.getJSONObject(i).getString("주소")
-                    val accom_parkinglot = accom_Arr.getJSONObject(i).getString("주차장")
-                    val accom_wifi = accom_Arr.getJSONObject((i)).getString("와이파이")
+                for(i in 0 until 50) {
+                    val accom_name = accom_Arr.getJSONObject(i).getString("accom_name")
+                    val accom_addr = accom_Arr.getJSONObject(i).getString("accom_addr")
+                    val accom_parkinglot = accom_Arr.getJSONObject(i).getString(("accom_parkinglot"))
+                    val accom_wifi = accom_Arr.getJSONObject((i)).getString("accom_wifi")
 
                     //35.8147, 127.1526
                     if(!(geoCoding(accom_addr).latitude.toDouble() in 35.8127..35.8167 && geoCoding(accom_addr).longitude.toDouble() in 127.1506..127.1546))
                         continue
 
                     val markerOption = MarkerOptions()
-                    markerOption.position(LatLng(geoCoding(accom_addr).latitude, geoCoding(accom_addr).longitude)).alpha(0.5f)
+                    markerOption.position(LatLng(geoCoding(accom_addr).latitude, geoCoding(accom_addr).longitude)).title(accom_name.toString()).alpha(0.5f)
                     val marker: Marker = mMap.addMarker((markerOption))
-
-                    var accom_Name = findViewById<TextView>(R.id.accom_name)
-                    var accom_Addr = findViewById<TextView>(R.id.accom_addr)
-                    var accom_Parkinglot = findViewById<TextView>(R.id.accom_parkinglot)
-                    var accom_Wifi = findViewById<TextView>(R.id.accom_wifi)
-
-                    accom_Name.text = accom_name.toString()
-                    accom_Addr.text = accom_addr.toString()
-                    accom_Parkinglot.text = accom_parkinglot.toString()
-                    accom_Wifi.text = accom_wifi
+                    marker.tag =
+                        accom_name + "/" +
+                        accom_addr + "/" +
+                        accom_parkinglot + "/" +
+                        accom_wifi
                 }
             }
         ) { error: VolleyError -> textView!!.text = "error: ${error.message}" }
@@ -210,8 +201,19 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         googleMap!!.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
             override fun onMarkerClick(marker: Marker) : Boolean {
-                if(marker.title == null)
-                    card_view.visibility = View.VISIBLE
+                var accom_Name = findViewById<TextView>(R.id.accom_name)
+                var accom_Addr = findViewById<TextView>(R.id.accom_addr)
+                var accom_Parkinglot = findViewById<TextView>(R.id.accom_parkinglot)
+                var accom_Wifi = findViewById<TextView>(R.id.accom_wifi)
+
+                var tags = marker.tag.toString().split("/")
+
+                accom_Name.text = tags[0]
+                accom_Addr.text = tags[1]
+                accom_Parkinglot.text = tags[2]
+                accom_Wifi.text = tags[3]
+
+                card_view.visibility = View.VISIBLE
 
                 return false
             }
@@ -222,7 +224,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                 card_view.visibility = View.GONE
             }
         })
-        Log.v("시발","ㅎㅇ")
     }
 
     // Get current location
