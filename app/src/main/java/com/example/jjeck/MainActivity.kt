@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                                 geoCoding(accom_addr).latitude,
                                 geoCoding(accom_addr).longitude
                             )
-                        ).title(accom_name.toString()).alpha(0.5f)
+                        )
                         val marker: Marker = mMap.addMarker((markerOption))
                         marker.tag =
                             accom_name + "/" +
@@ -238,7 +238,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         googleMap!!.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
             override fun onMarkerClick(marker: Marker) : Boolean {
-                if(marker.title != null) {
+                if(marker.title == null) {
                     var accom_Name = findViewById<TextView>(R.id.accom_name)
                     var accom_Addr = findViewById<TextView>(R.id.accom_addr)
                     var accom_Parkinglot = findViewById<TextView>(R.id.accom_parkinglot)
